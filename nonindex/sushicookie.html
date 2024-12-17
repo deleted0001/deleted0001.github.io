@@ -1,21 +1,43 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Overlay YouTube Video</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
-    <body>
-        <img src="sushicookie.png" alt="Tall PNG">
-        <div class="video-container">
-            <iframe 
-                src="https://www.youtube.com/embed/3-fRZYtNjDI  "
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-    </body>
-    </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay YouTube Video</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <img src="sushicookie.png" alt="Tall PNG">
+
+    <div class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/3-fRZYtNjDI"
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Audio Play Button -->
+    <div class="audio-container">
+        <audio id="audio" src="synical.wav" style="display: none;"></audio>
+        <button id="play-button">Play</button>
+    </div>
+
+    <script>
+        const playButton = document.getElementById('play-button');
+        const audio = document.getElementById('audio');
+
+        playButton.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playButton.textContent = 'Pause';
+            } else {
+                audio.pause();
+                playButton.textContent = 'Play';
+            }
+        });
+    </script>
+</body>
+</html>
