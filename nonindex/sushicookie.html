@@ -19,23 +19,44 @@
         </iframe>
     </div>
 
-    <!-- Audio Play Button -->
-    <div class="audio-container">
-        <audio id="audio" src="synical.wav" style="display: none;"></audio>
-        <button id="play-button">Play</button>
+    <!-- First Audio Play Button -->
+    <div class="audio-container" id="audio-container-1">
+        <audio id="audio-1" src="synical.wav" style="display: none;"></audio>
+        <button id="play-button-1">Play?</button>
+    </div>
+
+    <!-- Second Audio Play Button -->
+    <div class="audio-container" id="audio-container-2">
+        <audio id="audio-2" src="grandma.wav" style="display: none;"></audio>
+        <button id="play-button-2">Play?</button>
     </div>
 
     <script>
-        const playButton = document.getElementById('play-button');
-        const audio = document.getElementById('audio');
+        // First Audio Player Script
+        const playButton1 = document.getElementById('play-button-1');
+        const audio1 = document.getElementById('audio-1');
 
-        playButton.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                playButton.textContent = 'Pause';
+        playButton1.addEventListener('click', () => {
+            if (audio1.paused) {
+                audio1.play();
+                playButton1.textContent = 'Pause';
             } else {
-                audio.pause();
-                playButton.textContent = 'Play';
+                audio1.pause();
+                playButton1.textContent = 'Play';
+            }
+        });
+
+        // Second Audio Player Script
+        const playButton2 = document.getElementById('play-button-2');
+        const audio2 = document.getElementById('audio-2');
+
+        playButton2.addEventListener('click', () => {
+            if (audio2.paused) {
+                audio2.play();
+                playButton2.textContent = 'Pause';
+            } else {
+                audio2.pause();
+                playButton2.textContent = 'Play';
             }
         });
     </script>

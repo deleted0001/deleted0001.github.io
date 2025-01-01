@@ -28,14 +28,21 @@ iframe {
 
 .audio-container {
     position: absolute;
-    top: 68.5%; /* Adjust this value to control vertical placement */
     left: 50%; /* Center horizontally */
-    transform: translate(-50%, -50%); /* Ensure it stays centered */
+    transform: translateX(-50%); /* Ensure it stays centered */
     text-align: center;
+    margin-top: 10px;
 }
 
+#audio-container-1 {
+    top: 67.5%; /* Position of the first audio player */
+}
 
-button#play-button {
+#audio-container-2 {
+    top: 63%; /* Position of the second audio player */
+}
+
+button {
     display: inline-block;
     padding: 1.5vw 2.5vw; /* Scales padding with viewport */
     font-size: 2vw; /* Scales font size with viewport */
@@ -47,6 +54,6 @@ button#play-button {
     transition: background-color 0.3s ease;
 }
 
-button#play-button:hover {
+button:hover {
     background-color: #0056b3;
 }
