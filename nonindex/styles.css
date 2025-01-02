@@ -49,18 +49,20 @@ iframe {
 /* Audio play button containers */
 .audio-container {
     position: absolute;
-    left: 50%;
+
     transform: translateX(-50%);
     z-index: 2; /* Above the PNG and background */
+    left: 40%;
 }
 
 /* Positioning individual audio buttons */
 #audio-container-1 {
-    top: 71.5%; /* Adjust as needed for first button */
+    top: 47.2%; /* Adjust as needed for first button */
+    left: 50%;
 }
 
 #audio-container-2 {
-    top: 67.5%; /* Adjust as needed for second button */
+    top: 42.5%; /* Adjust as needed for second button */
 }
 
 /* Button styling */
