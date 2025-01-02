@@ -31,11 +31,11 @@ body {
 /* YouTube video container */
 .video-container {
     position: absolute;
-    top: 40%; /* Adjust this to position the video on the PNG */
+    top: 35.2%; /* Adjust this to position the video on the PNG */
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50vw; /* Scale width based on viewport */
-    height: calc(50vw * 9 / 16); /* Maintain 16:9 aspect ratio */
+    width: 52vw; /* Scale width based on viewport */
+    height: calc(52vw * 9 / 16); /* Maintain 16:9 aspect ratio */
     z-index: 2; /* Above the background and PNG */
 }
 
@@ -56,11 +56,11 @@ iframe {
 
 /* Positioning individual audio buttons */
 #audio-container-1 {
-    top: 60%; /* Adjust as needed for first button */
+    top: 71.5%; /* Adjust as needed for first button */
 }
 
 #audio-container-2 {
-    top: 65%; /* Adjust as needed for second button */
+    top: 67.5%; /* Adjust as needed for second button */
 }
 
 /* Button styling */
