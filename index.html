@@ -26,6 +26,9 @@
             justify-content: center;
             gap: 50px;
             margin: 20px 0;
+            margin-top: 300px; /* Specifically moves it lower */
+            z-index: 1; /* Ensure the menu is above the logo */
+            position: relative; /* Required for z-index to take effect */
         }
 
         .menu-item {
@@ -70,15 +73,26 @@
             text-align: center;
             font-size: 78px;
         }
+        .logo {
+    position: absolute;
+    top: -135px; /* Adjust as needed */
+    left: 50%; /* Move the logo to the center of the viewport */
+    transform: translateX(-50%); /* Offset the logo by half its width */
+    width: 1000px; /* Adjust size if necessary */
+    height: auto; /* Maintain aspect ratio */
+}
+
     </style>
 </head>
 
 <body>
+    <img src="nonindex/logo.png" alt="Logo" class="logo">
+    <h2>(Unaffiliated And Unresembling Of Crumbl Cookies, Not To Mention Protected Under Parody Laws)</h2>
+    <!-- <h1>MYSTERY COOKIE PAGE</h1> -->
 
-    <h2>(Unofficial and Unaffiliated)</h2>
-    <h1>MYSTERY COOKIE PAGE</h1>
 
     <div class="menu">
+
         <div class="menu-item">
             <a href="nonindex/cookieblog.html">BLOG PAGE</a>
             <p>not working</p>
