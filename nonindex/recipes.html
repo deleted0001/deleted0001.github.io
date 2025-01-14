@@ -57,22 +57,21 @@
 
         /* Audio Button Styling */
         .audio-button {
-    background-color: #ffffff;
-    border: red;
-    border-radius: 10000px;
-    color: rgb(255, 0, 0);
-    padding: 15px 32px;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 12px;
-    position: absolute; /* Change from 'fixed' to 'absolute' */
-    top: 20px; /* Adjust the distance from the top of the page */
-    right: 20px; /* Adjust the distance from the right of the page */
-    transition: background-color 0.3s;
-    z-index: 9999;
-}
-
+            background-color: #ffffff; /* Green background */
+            border: red;
+            border-radius: 10000px;
+            color: rgb(255, 0, 0);
+            padding: 15px 32px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 12px;
+            position: fixed; /* Fixed position on screen */
+            top: 20px; /* Adjust the distance from the bottom of the page */
+            right: 20px; /* Adjust the distance from the right of the page */
+            transition: background-color 0.3s;
+            z-index: 9999; /* Bring the button higher on the z-axis */
+        }
 
         .audio-button:hover {
             background-color: #45a049; /* Darker green when hovered */
@@ -88,16 +87,18 @@
         }
 
         /* Mega Cookie Image */
-        .mega-cookie {
-            position: fixed; /* Keep it at the top of the viewport */
-            top: -10vw; /* Distance from the top */
-            left: 50%; /* Center it horizontally */
-            transform: translateX(-50%); /* Offset by half its width for centering */
-            width: 60vw; /* Control width using viewport units */
-            height: auto; /* Maintain aspect ratio */
-            z-index: 1000; /* Ensure it stays above the rest of the content */
-            min-width: 800px;
-        }
+/* Mega Cookie Image */
+.mega-cookie {
+    position: absolute; /* Change from 'fixed' to 'absolute' */
+    top: -10vw; /* Align it at the top of the page */
+    left: 50%; /* Center it horizontally */
+    transform: translateX(-50%); /* Offset by half its width for centering */
+    width: 60vw; /* Control width using viewport units */
+    height: auto; /* Maintain aspect ratio */
+    z-index: 1000; /* Ensure it stays above the rest of the content */
+    min-width: 800px;
+}
+
     </style>
 </head>
 
