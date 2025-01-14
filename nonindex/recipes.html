@@ -33,7 +33,7 @@
         .image-grid img {
             width: 30vw; /* Make the images responsive */
             max-width: 3000px; /* Set a maximum width for the images */
-            min-width: 450px;
+            min-width: 400px;
             height: auto; /* Maintain the aspect ratio */
             border: 2px solid transparent; /* Optional: Add a border for style */
             transition: transform 0.2s ease; /* Optional: Add hover scaling */
@@ -84,13 +84,26 @@
 
         .titular {
             font-family:  'Courier New', monospace;
-
         }
 
+        /* Mega Cookie Image */
+        .mega-cookie {
+            position: fixed; /* Keep it at the top of the viewport */
+            top: -10vw; /* Distance from the top */
+            left: 50%; /* Center it horizontally */
+            transform: translateX(-50%); /* Offset by half its width for centering */
+            width: 60vw; /* Control width using viewport units */
+            height: auto; /* Maintain aspect ratio */
+            z-index: 1000; /* Ensure it stays above the rest of the content */
+            min-width: 800px;
+        }
     </style>
 </head>
 
 <body>
+    <!-- Mega Cookie Image -->
+    <img src="extramegacookies.png" alt="Mega Cookie" class="mega-cookie">
+
     <button class="audio-button" onclick="toggleAudio()">Recipe Page Theme Song</button>
 
     <audio id="themeSong" loop>
@@ -111,8 +124,17 @@
 
     <a href="/index.html" class="back-button">Back 2 Home</a> <!-- Back Button -->
 
-    <div class =titular>
-    <h1>The Recipe Page</h1>
+    <div class="titular">
+     <!--  <h1>The Recipe Page</h1> -->
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+       <br>
+
     </div>
     <div class="image-grid">
         <a href="sushicookie.html">
