@@ -57,21 +57,22 @@
 
         /* Audio Button Styling */
         .audio-button {
-            background-color: #ffffff; /* Green background */
-            border: red;
-            border-radius: 10000px;
-            color: rgb(255, 0, 0);
-            padding: 15px 32px;
-            font-size: 16px;
-            cursor: pointer;
-            text-align: center;
-            border-radius: 12px;
-            position: fixed; /* Fixed position on screen */
-            top: 20px; /* Adjust the distance from the bottom of the page */
-            right: 20px; /* Adjust the distance from the right of the page */
-            transition: background-color 0.3s;
-            z-index: 9999; /* Bring the button higher on the z-axis */
-        }
+    background-color: #ffffff;
+    border: red;
+    border-radius: 10000px;
+    color: rgb(255, 0, 0);
+    padding: 15px 32px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 12px;
+    position: absolute; /* Change from 'fixed' to 'absolute' */
+    top: 20px; /* Adjust the distance from the top of the page */
+    right: 20px; /* Adjust the distance from the right of the page */
+    transition: background-color 0.3s;
+    z-index: 9999;
+}
+
 
         .audio-button:hover {
             background-color: #45a049; /* Darker green when hovered */
