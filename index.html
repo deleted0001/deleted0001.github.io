@@ -9,7 +9,15 @@
             flex-direction: column;
             min-height: 100vh;
             margin: 0;
-            background: linear-gradient(to bottom, #ff8fb1, #ffc8dd); /* Gradient background */
+            background: linear-gradient(90deg, #ffe6ed, #ff7bae, #ff8fb1);
+            background-size: 300% 300%; /* Scale the gradient for smooth movement */
+            animation: gradientAnimation 20s ease infinite; /* Animation settings */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .content {
@@ -68,11 +76,12 @@
             transform: rotate(180deg) scale(1.1); /* Rotate and scale */
         }
         .footnote {
-            text-align: center;
-            margin-top: 10px;
-            font-size: 18px;
-            display: block;
-        }
+    position: absolute;
+    bottom: 20px; /* Adjust the value to set the desired distance from the bottom */
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
 
         h1 {
             text-align: center;
@@ -130,12 +139,12 @@ a:active {
 
     </div>
 
-    <div class="content">
+    <!--<div class="content">
         <div class="cookieimage">
             <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <img src="https://i.pinimg.com/originals/c2/38/7b/c2387b0588357ef65d1e3729e3fc0f54.png" alt="Cookie Image">
             </a>
-        </div>
+        </div> -->
 
         <p class="footnote">
             Questions/Cookie Ideas? Email <a href="mailto:deletedclient0001@gmail.com">deletedclient0001@gmail.com </a><br> No Affiliation To Any Actual Cookie Companies  
