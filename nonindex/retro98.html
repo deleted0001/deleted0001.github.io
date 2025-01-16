@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retro Login</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ccd0d6, #e2e5e9);
+      font-family: 'Tahoma', sans-serif;
+      color: #000080;
+      background-image: repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.05) 0px, rgba(0, 0, 0, 0.05) 1px, transparent 1px, transparent 10px);
+    }
+
+    .login-container {
+      background-color: #ffffff;
+      padding: 20px;
+      border: 3px solid #808080;
+      border-radius: 5px;
+      box-shadow: 4px 4px 0 #c0c0c0, 8px 8px 0 #808080;
+      width: 350px;
+      text-align: center;
+    }
+
+    .login-container h1 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+      color: #000080;
+      border-bottom: 2px solid #808080;
+      padding-bottom: 5px;
+    }
+
+    .login-container input {
+      width: calc(100% - 20px);
+      padding: 8px;
+      margin: 10px 0;
+      border: 2px solid #808080;
+      border-radius: 3px;
+      background: #f0f0f0;
+      color: #000;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background-color: #c3d9ff;
+      color: #000080;
+      border: 2px solid #808080;
+      border-radius: 3px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-container button:hover {
+      background-color: #a8c7ff;
+    }
+
+    .login-container a {
+      display: block;
+      margin-top: 15px;
+      color: #000080;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .login-container a:hover {
+      text-decoration: underline;
+    }
+
+    .quirky-text {
+      font-size: 0.8rem;
+      color: #808080;
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    .login-container:before {
+      content: "🖥️ Welcome to Login 98";
+      display: block;
+      font-size: 1rem;
+      color: #000080;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Login 98</h1>
+    <form>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <a href="#">Forgot Password?</a>
+    <div class="quirky-text">"Saving the world, one login at a time."</div>
+  </div>
+</body>
+</html>

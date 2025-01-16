@@ -5,8 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Overlay YouTube Video</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Full-screen black overlay */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.25s ease-out;
+        }
+
+        /* Hide the loading screen after fade-out */
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+/* For Firefox */
+* {
+    scrollbar-width: 100px; /* Makes the scrollbar thinner */
+    scrollbar-color: #63ffa4 #ffffff; /* Thumb and track colors */
+}
+
+    </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen"></div>
+
     <!-- Digging thru my code? Email me that you've found dis and mayb ill give u somethin idk -->
 
     <!-- Background GIF -->
@@ -64,6 +94,14 @@
                 audio2.pause();
                 playButton2.textContent = 'Play';
             }
+        });
+
+        // Loading screen script
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 250); // 1 second fade-out duration
         });
     </script>
 </body>
