@@ -55,25 +55,24 @@
             border-radius: 0px;
         }
 
-/* Audio Button Styling */
-.audio-button {
-    background-color: rgb(255, 255, 255);
-    border: red;
-    border-radius: 100px;
-    color: rgb(0, 0, 0);
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-    text-align: center;
-    border-radius: 3px;
-    position: absolute; /* Changed from 'fixed' to 'absolute' */
-    top: 25px; /* Adjust the distance from the top of the page */
-    right: 25px; /* Adjust the distance from the right of the page */
-    transition: background-color 0.3s;
-    z-index: 9999;
-    font-family:fantasy;
-}
-
+        /* Audio Button Styling */
+        .audio-button {
+            background-color: rgb(255, 255, 255);
+            border: red;
+            border-radius: 100px;
+            color: rgb(0, 0, 0);
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            text-align: center;
+            border-radius: 3px;
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            transition: background-color 0.3s;
+            z-index: 9999;
+            font-family: fantasy;
+        }
 
         .audio-button:hover {
             background-color: #ff0000;
@@ -85,22 +84,34 @@
         }
 
         .titular {
-            font-family:  'Courier New', monospace;
+            font-family: 'Courier New', monospace;
         }
 
         /* Mega Cookie Image */
-/* Mega Cookie Image */
-.mega-cookie {
-    position: absolute; /* Change from 'fixed' to 'absolute' */
-    top: -10vw; /* Align it at the top of the page */
-    left: 50%; /* Center it horizontally */
-    transform: translateX(-50%); /* Offset by half its width for centering */
-    width: 60vw; /* Control width using viewport units */
-    height: auto; /* Maintain aspect ratio */
-    z-index: -1; /* Ensure it stays above the rest of the content */
-    min-width: 800px;
-}
+        .mega-cookie {
+            position: absolute;
+            top: -10vw;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60vw;
+            height: auto;
+            z-index: -1;
+            min-width: 800px;
+            animation: subtleRotate 3s infinite ease-in-out;
+        }
 
+        /* Subtle rotation animation */
+        @keyframes subtleRotate {
+            0% {
+                transform: translateX(-50%) rotate(-1deg);
+            }
+            50% {
+                transform: translateX(-50%) rotate(1deg);
+            }
+            100% {
+                transform: translateX(-50%) rotate(-1deg);
+            }
+        }
     </style>
 </head>
 
@@ -126,19 +137,18 @@
         }
     </script>
 
-     <a href="about.html" class="back-button">About Us</a> <!--Back Button -->
+    <a href="about.html" class="back-button">About Us</a> <!-- Back Button -->
 
     <div class="titular">
-     <!--  <h1>The Recipe Page</h1> -->
-       <br>
-       <br> 
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-       <br>
-
+        <!-- <h1>The Recipe Page</h1> -->
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
     </div>
     <div class="image-grid">
         <a href="sushicookie.html">
