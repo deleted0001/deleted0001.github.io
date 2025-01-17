@@ -1,222 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Palatino+Linotype:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    /* Loading screen styles */
-    #loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      z-index: 1000;
-      opacity: 1;
-      transition: opacity 0.25s ease-out;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay YouTube Video</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Full-screen black overlay */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.25s ease-out;
+        }
 
-    #loading-screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
+        /* Hide the loading screen after fade-out */
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
 
-    /* General body styling */
-    body {
-      margin: 0;
-      padding: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: url('scanlines2.gif') repeat;
-      background-size: cover;
-      font-family: 'Palatino Linotype', 'Georgia', 'serif';
-      color: #ff0000;
-      overflow: hidden;
-      text-align: center;
-      position: relative;
-    }
+/* For Firefox */
+* {
+    scrollbar-width: 100px; /* Makes the scrollbar thinner */
+    scrollbar-color: #63ffa4 #ffffff; /* Thumb and track colors */
+}
 
-    /* Title styling */
-    .title {
-      font-size: 100px;
-      color: white;
-      font-weight: bold;
-      text-shadow: 2px 2px 4px #000000;
-      margin-top: -60vh;
-    }
-
-    /* Container for the image */
-    .image-container {
-      position: absolute;
-      top: 20vh;
-      left: 10vw;
-      width: 80vw;
-      height: 60vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 1;
-    }
-
-    .image-container img {
-      width: 200vh;
-      height: auto;
-      object-fit: contain;
-    }
-
-    /* Login form container */
-    .login-container {
-      position: absolute;
-      top: 57%;
-      left: 50%;
-      width: 25vw;
-      height: 35vh;
-      transform: translate(-50%, -50%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 2;
-    }
-
-    .login-form {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .login-form input,
-    .login-form button {
-      width: 80%;
-      padding: 10px;
-      margin: 10px 0;
-      border: 2px solid #ff0000;
-      border-radius: 2px;
-      background: #1c1c1c;
-      color: #ff0000;
-      font-family: inherit;
-      font-size: 1rem;
-      box-shadow: inset 1px 1px #ff0000;
-    }
-
-    .login-form button {
-      background-color: #800000;
-      color: #ffffff;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 #8b0000;
-      text-transform: uppercase;
-      text-shadow: 1px 1px 2px #ff0000;
-    }
-
-    .login-form button:hover {
-      background-color: #ff0000;
-      box-shadow: 3px 3px 0 #800000;
-      text-shadow: 1px 1px 5px #8b0000;
-    }
-
-    .login-form a {
-      display: block;
-      margin-top: 15px;
-      color: #ff0000;
-      text-decoration: none;
-      font-size: 0.9rem;
-      text-shadow: 1px 1px 2px #800000;
-    }
-
-    .login-form a:hover {
-      text-decoration: underline;
-      color: #8b0000;
-    }
-
-    /* Play button styling */
-    .play-button {
-      position: absolute;
-      bottom: 10vh; /* Adjusted to be at the bottom */
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 15px 30px;
-      font-size: 1.1rem;
-      background-color: #800000;
-      color: #ffffff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 #8b0000;
-      text-shadow: 1px 1px 2px #ff0000;
-      z-index: 4; /* Added z-index to make sure it's on top */
-    }
-
-    .play-button:hover {
-      background-color: #ff0000;
-      box-shadow: 3px 3px 0 #800000;
-      text-shadow: 1px 1px 5px #8b0000;
-    }
-
-  </style>
+    </style>
 </head>
 <body>
-  <!-- Loading Screen -->
-  <div id="loading-screen"></div>
+    <!-- Loading Screen -->
+    <div id="loading-screen"></div>
 
-  <!-- Title -->
-  <div class="title">
-    Secret<br>Employee Page
-  </div>
+    <!-- Digging thru my code? Email me that you've found dis and mayb ill give u somethin idk -->
 
-  <!-- Image container -->
-  <div class="image-container">
-    <img src="loginbox.png" alt="Login Box">
-  </div>
+    <!-- Background GIF -->
+    <img src="grossgifgreen.gif" alt="GIF below the PNG" class="background">
 
-  <!-- Login form container -->
-  <div class="login-container">
-    <div class="login-form">
-      <form>
-        <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-      </form>
-      <a href="#">Forgot Password?</a>
+    <!-- Foreground PNG -->
+    <img src="sushicookie.png" alt="Tall PNG" class="foreground">
+
+    <!-- YouTube Video -->
+    <div class="video-container">   
+        <iframe 
+            src="https://www.youtube.com/embed/EH2Bifq4WbE"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
     </div>
-  </div>
 
-  <!-- Play/Pause Button -->
-  <button class="play-button" onclick="toggleAudio()">Secret Employee Login <br> Page Theme Song</button>
+    <!-- First Audio Play Button -->
+    <div class="audio-container" id="audio-container-1">
+        <audio id="audio-1" src="synical.wav" style="display: none;"></audio>
+        <button id="play-button-1">Play?</button>
+    </div>
 
-  <audio id="themeAudio" loop>
-    <source src="employeelogin.wav" type="audio/wav">
-  </audio>
+    <!-- Second Audio Play Button -->
+    <div class="audio-container" id="audio-container-2">
+        <audio id="audio-2" src="grandma.wav" style="display: none;"></audio>
+        <button id="play-button-2">Play?</button>
+    </div>
 
-  <script>
-    // Fade out loading screen after page loads
-    window.addEventListener('load', () => {
-      const loadingScreen = document.getElementById('loading-screen');
-      setTimeout(() => {
-        loadingScreen.classList.add('hidden');
-      }, 250); // 0.25-second fade-out duration
-    });
+    <script>
+        // First Audio Player Script
+        const playButton1 = document.getElementById('play-button-1');
+        const audio1 = document.getElementById('audio-1');
 
-    // Play/Pause audio function
-    let audio = document.getElementById('themeAudio');
-    let isPlaying = false;
+        playButton1.addEventListener('click', () => {
+            if (audio1.paused) {
+                audio1.play();
+                playButton1.textContent = 'Pause';
+            } else {
+                audio1.pause();
+                playButton1.textContent = 'Play';
+            }
+        });
 
-    function toggleAudio() {
-      if (isPlaying) {
-        audio.pause();  // Pause the audio
-        isPlaying = false;
-      } else {
-        audio.play();   // Play the audio
-        isPlaying = true;
-      }
-    }
-  </script>
+        // Second Audio Player Script
+        const playButton2 = document.getElementById('play-button-2');
+        const audio2 = document.getElementById('audio-2');
+
+        playButton2.addEventListener('click', () => {
+            if (audio2.paused) {
+                audio2.play();
+                playButton2.textContent = 'Pause';
+            } else {
+                audio2.pause();
+                playButton2.textContent = 'Play';
+            }
+        });
+
+        // Loading screen script
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 250); // 1 second fade-out duration
+        });
+    </script>
 </body>
 </html>
