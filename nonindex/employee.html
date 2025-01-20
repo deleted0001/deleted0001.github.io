@@ -24,6 +24,27 @@
             background-size: cover;
             background-position: center;
         }
+        .red-rectangle {
+            position: absolute;
+            top: 38%;
+            left: 38%;
+            width: 22%;
+            height: 26%;
+            z-index: 15;
+            min-width: 300px;
+            aspect-ratio: 11 / 14;
+            background-color: transparent; /* Make the background invisible */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 0px solid white; /* Optional: to show the boundary */
+        }
+        .red-rectangle h2 {
+            color: white;
+            font-size: 1.5em;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
+        }
         .overlay {
             position: absolute;
             top: 0;
@@ -79,13 +100,34 @@
         }
         .tap-button.left {
             left: 10px;
-            width:13vw;
-            height:auto;
+            width: 13vw;
         }
         .tap-button.right {
             right: 10px;
-            width:13vw;
-            height:auto;
+            width: 13vw;
+        }
+        .flush-button {
+            position: absolute;
+            bottom: 50vh;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10vw;
+            height: auto;
+            cursor: pointer;
+            z-index: 12;
+            display: none;
+        }
+
+        /* New clickable TV area */
+        .clickable-tv {
+            position: absolute;
+            top: 30%;
+            left: 40%;
+            width: 20%;
+            height: 25%;
+            background-color: transparent;
+            cursor: pointer;
+            z-index: 20;
         }
     </style>
 </head>
@@ -93,7 +135,14 @@
     <div id="screen"></div>
 
     <div id="forward-pocket" class="state-pocket">
-        <h1>idk what</h1    >
+        <h1>Forward</h1>
+        <div class="red-rectangle">
+            <h2>Click here to watch TV</h2>
+        </div>
+        
+        <!-- Invisible clickable area over the TV -->
+        <div class="clickable-tv" onclick="handleTvClick()"></div>
+
         <img class="tap-button left" src="left_tap_here.png" alt="Left Tap" />
         <img class="tap-button right" src="right_tap_here.png" alt="Right Tap" />
     </div>
@@ -102,8 +151,8 @@
         <img class="tap-button right" src="right_tap_here.png" alt="Right Tap" />
     </div>
     <div id="right-pocket" class="state-pocket">
-        <h1>Right Pocket</h1>
         <img class="tap-button left" src="left_tap_here.png" alt="Left Tap" />
+        <img class="flush-button" src="flush_button.png" alt="Flush Button" />
     </div>
 
     <script>
@@ -149,11 +198,8 @@
             if (pocket) {
                 pocket.classList.add("active");
 
-                // Show appropriate tap buttons for the state
-                const leftButton = pocket.querySelector(".tap-button.left");
-                const rightButton = pocket.querySelector(".tap-button.right");
-                if (leftButton) leftButton.style.display = "block";
-                if (rightButton) rightButton.style.display = "block";
+                const buttons = pocket.querySelectorAll(".tap-button, .flush-button");
+                buttons.forEach(button => (button.style.display = "block"));
             }
         }
 
@@ -162,8 +208,7 @@
             if (pocket) {
                 pocket.classList.remove("active");
 
-                // Hide all tap buttons for the state
-                const buttons = pocket.querySelectorAll(".tap-button");
+                const buttons = pocket.querySelectorAll(".tap-button, .flush-button");
                 buttons.forEach(button => (button.style.display = "none"));
             }
         }
@@ -200,13 +245,18 @@
 
                 setTimeout(() => {
                     showPocket(currentState);
-                }, 500);
+                }, 1000);
 
                 isTransitioning = false;
             }, transition.duration);
         }
 
-        // Add event listeners for tap buttons
+        // Handle click event on the TV
+        function handleTvClick() {
+            console.log("TV clicked!");
+            // Add your desired functionality here for when the TV is clicked
+        }
+
         document.querySelectorAll(".tap-button.left").forEach(button => {
             button.addEventListener("click", () => {
                 if (currentState === "forward") {
@@ -225,6 +275,10 @@
                     playTransition(states.left.transitions.forward, "forward");
                 }
             });
+        });
+
+        document.querySelector(".flush-button").addEventListener("click", () => {
+            console.log("Flush button clicked!");
         });
 
         updateScreen(states.forward.image);

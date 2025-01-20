@@ -14,6 +14,7 @@
             background-color: #000;
             overflow: hidden;
         }
+
         #screen {
             width: 100%;
             height: 100%;
@@ -24,64 +25,22 @@
             background-size: cover;
             background-position: center;
         }
-        .overlay {
+
+        .red-rectangle {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            pointer-events: none;
-            z-index: 2;
+            z-index: 15;
+            background-color: rgba(255, 0, 0, 0.3); /* Light red background for visibility */
+            border: 2px solid red; /* Red border for visibility */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        .background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.1s ease-in-out;
-        }
-        .state-pocket {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: none;
-            z-index: 10;
-        }
-        .state-pocket.active {
-            display: block;
-        }
-        .state-pocket h1 {
-            position: absolute;
-            top: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3em;
+
+        .red-rectangle h2 {
             color: white;
+            font-size: 1.5em;
+            text-align: center;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-            z-index: 11;
-        }
-        .tap-button {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            z-index: 12;
-            display: none;
-        }
-        .tap-button.left {
-            left: 10px;
-        }
-        .tap-button.right {
-            right: 10px;
         }
     </style>
 </head>
@@ -89,142 +48,70 @@
     <div id="screen"></div>
 
     <div id="forward-pocket" class="state-pocket">
-        <h1>idk whit</h1>
-        <img class="tap-button left" src="left_tap_here.png" alt="Left Tap" />
-        <img class="tap-button right" src="right_tap_here.png" alt="Right Tap" />
-    </div>
-    <div id="left-pocket" class="state-pocket">
-        <h1>Left Pocket</h1>
-        <img class="tap-button right" src="right_tap_here.png" alt="Right Tap" />
-    </div>
-    <div id="right-pocket" class="state-pocket">
-        <h1>Right Pocket</h1>
-        <img class="tap-button left" src="left_tap_here.png" alt="Left Tap" />
+        <h1>Forward</h1>
+        <div class="red-rectangle">
+            <h2>Click here to watch TV</h2>
+        </div>
     </div>
 
     <script>
-        const screen = document.getElementById("screen");
+        // Function to update .red-rectangle's position and size based on the image
+        function updateRedRectangle() {
+            const screen = document.getElementById("screen");
+            const redRectangle = document.querySelector(".red-rectangle");
+            const forwardImage = new Image();
 
-        const states = {
-            forward: {
-                image: "forward.png",
-                transitions: {
-                    left: { gif: "f2l.gif", duration: 2000 },
-                    right: { gif: "f2r.gif", duration: 1950 }
+            forwardImage.src = "forward.png"; // Path to your image
+            forwardImage.onload = () => {
+                // Get the screen's actual dimensions
+                const screenRect = screen.getBoundingClientRect();
+
+                // Calculate the image's actual dimensions (based on aspect ratio)
+                const imageAspectRatio = forwardImage.naturalWidth / forwardImage.naturalHeight;
+                const screenAspectRatio = screenRect.width / screenRect.height;
+
+                let imageWidth, imageHeight;
+                if (imageAspectRatio > screenAspectRatio) {
+                    // Image is wider than the screen
+                    imageWidth = screenRect.width;
+                    imageHeight = imageWidth / imageAspectRatio;
+                } else {
+                    // Image is taller than the screen
+                    imageHeight = screenRect.height;
+                    imageWidth = imageHeight * imageAspectRatio;
                 }
-            },
-            left: {
-                image: "left.png",
-                transitions: {
-                    forward: { gif: "l2f.gif", duration: 2000 }
-                }
-            },
-            right: {
-                image: "right.png",
-                transitions: {
-                    forward: { gif: "r2f.gif", duration: 1950 }
-                }
-            }
-        };
 
-        let currentState = "forward";
-        let isTransitioning = false;
+                // Calculate the offset of the image within the screen
+                const offsetX = (screenRect.width - imageWidth) / 2;
+                const offsetY = (screenRect.height - imageHeight) / 2;
 
-        function preloadImage(image) {
-            const img = new Image();
-            img.src = image;
+                // Define the TV's position and size relative to the image
+                const tvArea = {
+                    x: 0.35 * imageWidth, // 35% from the left of the image
+                    y: 0.4 * imageHeight, // 40% from the top of the image
+                    width: 0.3 * imageWidth, // 30% of the image width
+                    height: 0.2 * imageHeight, // 20% of the image height
+                };
+
+                // Update the .red-rectangle's position and size
+                redRectangle.style.left = `${offsetX + tvArea.x}px`;
+                redRectangle.style.top = `${offsetY + tvArea.y}px`;
+                redRectangle.style.width = `${tvArea.width}px`;
+                redRectangle.style.height = `${tvArea.height}px`;
+            };
         }
 
-        function updateScreen(image) {
-            const uniqueImage = `${image}?t=${Date.now()}`;
-            screen.style.backgroundImage = `url(${uniqueImage})`;
-        }
+        // Call the function when the page loads
+        updateRedRectangle();
 
-        function showPocket(state) {
-            const pocket = document.getElementById(`${state}-pocket`);
-            if (pocket) {
-                pocket.classList.add("active");
+        // Recalculate on window resize to keep it consistent
+        window.addEventListener("resize", updateRedRectangle);
 
-                // Show appropriate tap buttons for the state
-                const leftButton = pocket.querySelector(".tap-button.left");
-                const rightButton = pocket.querySelector(".tap-button.right");
-                if (leftButton) leftButton.style.display = "block";
-                if (rightButton) rightButton.style.display = "block";
-            }
-        }
-
-        function hidePocket(state) {
-            const pocket = document.getElementById(`${state}-pocket`);
-            if (pocket) {
-                pocket.classList.remove("active");
-
-                // Hide all tap buttons for the state
-                const buttons = pocket.querySelectorAll(".tap-button");
-                buttons.forEach(button => (button.style.display = "none"));
-            }
-        }
-
-        function playTransition(transition, nextState) {
-            if (isTransitioning) return;
-
-            isTransitioning = true;
-            const uniqueGif = `${transition.gif}?t=${Date.now()}`;
-
-            hidePocket(currentState);
-
-            const overlay = document.createElement("div");
-            overlay.className = "overlay";
-            overlay.style.backgroundImage = `url(${uniqueGif})`;
-
-            const background = document.createElement("div");
-            background.className = "background";
-            background.style.backgroundImage = `url(${states[nextState].image})`;
-
-            screen.appendChild(background);
-            screen.appendChild(overlay);
-
-            setTimeout(() => {
-                background.style.opacity = 1;
-            }, 1000);
-
-            setTimeout(() => {
-                currentState = nextState;
-
-                setTimeout(() => {
-                    screen.removeChild(overlay);
-                }, transition.duration - 1000);
-
-                setTimeout(() => {
-                    showPocket(currentState);
-                }, 500);
-
-                isTransitioning = false;
-            }, transition.duration);
-        }
-
-        // Add event listeners for tap buttons
-        document.querySelectorAll(".tap-button.left").forEach(button => {
-            button.addEventListener("click", () => {
-                if (currentState === "forward") {
-                    playTransition(states.forward.transitions.left, "left");
-                } else if (currentState === "right") {
-                    playTransition(states.right.transitions.forward, "forward");
-                }
-            });
+        // Add click functionality for the red rectangle
+        document.querySelector(".red-rectangle").addEventListener("click", () => {
+            console.log("TV clicked!");
+            // Add your desired functionality here when the TV is clicked
         });
-
-        document.querySelectorAll(".tap-button.right").forEach(button => {
-            button.addEventListener("click", () => {
-                if (currentState === "forward") {
-                    playTransition(states.forward.transitions.right, "right");
-                } else if (currentState === "left") {
-                    playTransition(states.left.transitions.forward, "forward");
-                }
-            });
-        });
-
-        updateScreen(states.forward.image);
-        showPocket(currentState);
     </script>
 </body>
 </html>
