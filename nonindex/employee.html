@@ -26,19 +26,25 @@
         }
         .red-rectangle {
             position: absolute;
-            top: 38%;
-            left: 38%;
-            width: 22%;
-            height: 26%;
-            z-index: 15;
-            min-width: 300px;
-            aspect-ratio: 11 / 14;
-            background-color: transparent; /* Make the background invisible */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            border: 0px solid white; /* Optional: to show the boundary */
+            top: 44%; /* Adjust to match TV position */
+            left: 39%; /* Adjust to match TV position */
+            width: 15%; /* Adjust to match TV size */
+            min-width:300px;
+            aspect-ratio: 16 / 9; /* Adjust to match TV aspect ratio */
+            border: 0px solid red; /* Make it visible */
+            cursor: pointer;
         }
+        .blue-rectangle {
+    position: absolute;
+    top: 40%; /* Adjust to desired position */
+    left: 43%; /* Adjust to desired position */
+    width: 17%; /* Adjust to match size */
+    min-width: 300px;
+    aspect-ratio: 4 / 3; /* Match aspect ratio */
+    border: ox solid blue; /* Blue rectangle */
+    cursor: pointer;
+    right: 5000px; /* Adjust to set minimum distance from the right side */
+}
         .red-rectangle h2 {
             color: white;
             font-size: 1.5em;
@@ -129,33 +135,61 @@
             cursor: pointer;
             z-index: 20;
         }
+        .theme-song-button {
+    position: absolute;
+    bottom: 10%; /* Adjust to the desired distance from the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4d539e; /* Green background color (can be changed) */
+    color: white; /* Text color */
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    z-index: 12; /* Ensure it's above other elements */
+}
+
+.theme-song-button:hover {
+    background-color: #5d82c7; /* Darker green on hover */
+}
+
+
     </style>
 </head>
 <body>
     <div id="screen"></div>
 
-    <div id="forward-pocket" class="state-pocket">
-        <h1>Forward</h1>
+    <div id="forward-pocket" class="state-pocket"> <!-- FORWARD POCKET 
         <div class="red-rectangle">
             <h2>Click here to watch TV</h2>
         </div>
         
-        <!-- Invisible clickable area over the TV -->
-        <div class="clickable-tv" onclick="handleTvClick()"></div>
 
+        <div class="clickable-tv" onclick="handleTvClick()"></div>-->
+    
+        <!-- Theme song button (positioned at the bottom center) -->
+        <button class="theme-song-button" onclick="toggleThemeSong()">Virtual Office For WFH Employees Page Theme Song</button>
+    
         <img class="tap-button left" src="left_tap_here.png" alt="Left Tap" />
         <img class="tap-button right" src="right_tap_here.png" alt="Right Tap" />
     </div>
-    <div id="left-pocket" class="state-pocket">
-        <h1>Left Pocket</h1>
+    
+    <div id="left-pocket" class="state-pocket">                                     <!-- LEFT POCKET -->   
+     
+        <div class="blue-rectangle" onclick="handleBlueClick()">
+            <h1>Enter Desktop</h1>
+        </div>
         <img class="tap-button right" src="right_tap_here.png" alt="Right Tap" />
     </div>
-    <div id="right-pocket" class="state-pocket">
+    <div id="right-pocket" class="state-pocket">                                    <!-- FORWARD POCKET -->    
         <img class="tap-button left" src="left_tap_here.png" alt="Left Tap" />
         <img class="flush-button" src="flush_button.png" alt="Flush Button" />
     </div>
 
     <script>
+let steppingAudio = new Audio('stepping.wav'); // Stepping sound audio
+
+
         const screen = document.getElementById("screen");
 
         const states = {
@@ -214,48 +248,58 @@
         }
 
         function playTransition(transition, nextState) {
-            if (isTransitioning) return;
+    if (isTransitioning) return;
 
-            isTransitioning = true;
-            const uniqueGif = `${transition.gif}?t=${Date.now()}`;
+    isTransitioning = true;
 
-            hidePocket(currentState);
+    // Play stepping sound when a transition happens
+    steppingAudio.play();
 
-            const overlay = document.createElement("div");
-            overlay.className = "overlay";
-            overlay.style.backgroundImage = `url(${uniqueGif})`;
+    const uniqueGif = `${transition.gif}?t=${Date.now()}`;
 
-            const background = document.createElement("div");
-            background.className = "background";
-            background.style.backgroundImage = `url(${states[nextState].image})`;
+    hidePocket(currentState);
 
-            screen.appendChild(background);
-            screen.appendChild(overlay);
+    const overlay = document.createElement("div");
+    overlay.className = "overlay";
+    overlay.style.backgroundImage = `url(${uniqueGif})`;
 
-            setTimeout(() => {
-                background.style.opacity = 1;
-            }, 1000);
+    const background = document.createElement("div");
+    background.className = "background";
+    background.style.backgroundImage = `url(${states[nextState].image})`;
 
-            setTimeout(() => {
-                currentState = nextState;
+    screen.appendChild(background);
+    screen.appendChild(overlay);
 
-                setTimeout(() => {
-                    screen.removeChild(overlay);
-                }, transition.duration - 1000);
+    setTimeout(() => {
+        background.style.opacity = 1;
+    }, 1000);
 
-                setTimeout(() => {
-                    showPocket(currentState);
-                }, 1000);
+    setTimeout(() => {
+        currentState = nextState;
 
-                isTransitioning = false;
-            }, transition.duration);
-        }
+        setTimeout(() => {
+            screen.removeChild(overlay);
+        }, transition.duration - 1000);
+
+        setTimeout(() => {
+            showPocket(currentState);
+        }, 1000);
+
+        isTransitioning = false;
+    }, transition.duration);
+}
+
 
         // Handle click event on the TV
         function handleTvClick() {
             console.log("TV clicked!");
             // Add your desired functionality here for when the TV is clicked
         }
+// Update the handleBlueClick function to redirect to desktop.html
+function handleBlueClick() {
+    console.log("Blue rectangle clicked!");
+    window.location.href = "desktop.html";  // Redirect to desktop.html
+}
 
         document.querySelectorAll(".tap-button.left").forEach(button => {
             button.addEventListener("click", () => {
@@ -277,12 +321,82 @@
             });
         });
 
-        document.querySelector(".flush-button").addEventListener("click", () => {
-            console.log("Flush button clicked!");
-        });
+
+    // Handle flush button click event
+    document.querySelector(".flush-button").addEventListener("click", () => {
+        console.log("Flush button clicked!");
+        const flushAudio = new Audio('flush.wav'); // Load the flush sound
+        flushAudio.play(); // Play the flush sound
+    });
+
 
         updateScreen(states.forward.image);
         showPocket(currentState);
+
+
+let audio = new Audio('wfh.wav'); // Theme song audio
+let isPlaying = false; // Track if the theme song is playing
+
+let sfxAudio = new Audio('wfhscream.wav'); // SFX audio for scream
+let sfxInterval = null; // To store the interval function
+// Add empty.wav audio declaration here
+let emptyAudio = new Audio('empty.wav'); // Empty sound audio
+emptyAudio.loop = true; // Set empty.wav to loo
+
+// Function to play the theme song
+function toggleThemeSong() {
+    console.log("Button clicked!"); // Confirm the function is triggered
+    if (isPlaying) {
+        console.log("Pausing theme song...");
+        audio.pause(); // Pause the theme song if it's playing
+    } else {
+        console.log("Playing theme song...");
+        audio.play(); // Play the theme song if it's not playing
+    }
+    isPlaying = !isPlaying; // Toggle the playing state
+}
+
+// Add this here to handle when wfh.wav ends
+audio.onended = function() {
+    console.log("WFH audio ended, starting empty.wav...");
+    emptyAudio.play(); // Start empty.wav on repeat when wfh.wav ends
+};
+
+// Function to start playing the random scream sound at random intervals
+function playRandomScream() {
+    // Stop any existing interval
+    if (sfxInterval) {
+        clearInterval(sfxInterval);
+    }
+
+    // Start a new interval
+    sfxInterval = setInterval(() => {
+        sfxAudio.play(); // Play the scream sound
+    }, getRandomInterval());
+}
+
+// Function to generate a random interval between 20 and 70 seconds
+function getRandomInterval() {
+    return Math.floor(Math.random() * (70000 - 20000 + 1)) + 20000; // Random time between 20000ms (20s) and 70000ms (70s)
+
+}
+
+// To trigger the random scream sound when theme song starts
+audio.onplay = function() {
+    playRandomScream(); // Start the random scream sound when theme song starts
+};
+
+// If the theme song is paused, the random scream sound will continue to play
+audio.onpause = function() {
+    // Random scream will keep playing even after the theme song is paused
+};
+
+// To trigger the random scream sound when theme song is initially played
+audio.oncanplaythrough = function() {
+    console.log("Theme song is ready to play!");
+};
+
+
     </script>
 </body>
 </html>
