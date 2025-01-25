@@ -8,15 +8,15 @@
         * {
             margin: 0;
             padding: 0;
-        }
-        html, body {
-            height: 100%;
+            box-sizing: border-box;
         }
         body {
             background-color: #000;
         }
         img {
             display: block;
+            width: 100%; /* Ensures the image takes up the full width of the viewport */
+            height: auto; /* Maintains the aspect ratio */
         }
     </style>
 </head>

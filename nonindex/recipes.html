@@ -10,10 +10,10 @@
             min-height: 100vh;
             margin: 0;
             background-color: rgb(255, 255, 255);
-            background-image: url('https://drive.google.com/uc?export=download&id=1R5dW7qgkpU6_Lh3gdkS6Th-_0Fh9590A');
+            background-image: url('bkgrnd.gif'); /* Set the GIF as the background */
             background-size: cover; /* Ensure the GIF covers the entire background */
             background-position: center; /* Center the GIF */
-            background-repeat: no-repeat; /* Prevent the GIF from repeating */
+
         }
 
         h1 {
@@ -44,15 +44,51 @@
         }
 
         /* Back Button Styling */
-        .back-button {
+        .back-button-container {
             position: absolute;
             bottom: 30px;
             left: 30px;
-            font-size: 32px;
-            text-decoration: none;
-            color: white;
-            padding: 5px 10px;
-            border-radius: 0px;
+            display: flex;
+            align-items: center; /* Align the image and text vertically */
+            gap: 10px; /* Space between the button and the arrow */
+            z-index: 9999;
+        }
+
+        .back-button {
+    font-size: 36px;
+    text-decoration: none;
+    color: black; /* Use a contrasting text color */
+    padding: 15px 25px;
+    background: linear-gradient(45deg, red, yellow, green, cyan, blue, magenta, red);
+    background-size: 400% 400%;
+    border-radius: 10px;
+    font-weight: bold;
+    animation: multicolorMove 5s infinite;
+    transition: transform 0.3s;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes multicolorMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.back-button:hover {
+    transform: scale(1.1); /* Slightly enlarge the button on hover */
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.8);
+}
+
+
+        .arrow {
+            width: 120px;
+            height: auto;
         }
 
         /* Audio Button Styling */
@@ -127,7 +163,7 @@
 
     <script>
         var audio = document.getElementById('themeSong');
-        
+
         function toggleAudio() {
             if (audio.paused) {
                 audio.play();  // Play audio if it's paused
@@ -137,7 +173,10 @@
         }
     </script>
 
-    <a href="about.html" class="back-button">About Us</a> <!-- Back Button -->
+    <div class="back-button-container">
+        <a href="about.html" class="back-button">ABOUT US</a>
+        <img src="arrow.png" alt="Arrow" class="arrow">
+    </div>
 
     <div class="titular">
         <!-- <h1>The Recipe Page</h1> -->
