@@ -52,7 +52,7 @@ iframe {
 
     transform: translateX(-50%);
     z-index: 2; /* Above the PNG and background */
-    left: 40%;
+    left: 50%;
 }
 
 /* Positioning individual audio buttons */
