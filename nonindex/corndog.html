@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overlay YouTube Video</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Full-screen black overlay */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 0.25s ease-out;
+        }
+
+        /* Hide the loading screen after fade-out */
+        #loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+/* For Firefox */
+* {
+    scrollbar-width: 100px; /* Makes the scrollbar thinner */
+    scrollbar-color: #63ffa4 #ffffff; /* Thumb and track colors */
+}
+
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen"></div>
+
+    <!-- Digging thru my code? Email me that you've found dis and mayb ill give u somethin idk -->
+
+    <!-- Background GIF -->
+    <img src="grossgifgreen.gif" alt="GIF below the PNG" class="background">
+
+    <!-- Foreground PNG -->
+    <img src="corndog.png" alt="Tall PNG" class="foreground">
+
+    <!-- YouTube Video -->
+    <div class="video-container">   
+        <iframe 
+            src="https://www.youtube.com/embed/EH2Bifq4WbE"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- First Audio Play Button -->
+    <div class="audio-container" id="audio-container-1">
+        <audio id="audio-1" src="synical.wav" style="display: none;"></audio>
+        <button id="play-button-1">Play?</button>
+    </div>
+
+    <!-- Second Audio Play Button -->
+    <div class="audio-container" id="audio-container-2">
+        <audio id="audio-2" src="grandma.wav" style="display: none;"></audio>
+        <button id="play-button-2">Play?</button>
+    </div>
+
+    <script>
+        // First Audio Player Script
+        const playButton1 = document.getElementById('play-button-1');
+        const audio1 = document.getElementById('audio-1');
+
+        playButton1.addEventListener('click', () => {
+            if (audio1.paused) {
+                audio1.play();
+                playButton1.textContent = 'Pause';
+            } else {
+                audio1.pause();
+                playButton1.textContent = 'Play';
+            }
+        });
+
+        // Second Audio Player Script
+        const playButton2 = document.getElementById('play-button-2');
+        const audio2 = document.getElementById('audio-2');
+
+        playButton2.addEventListener('click', () => {
+            if (audio2.paused) {
+                audio2.play();
+                playButton2.textContent = 'Pause';
+            } else {
+                audio2.pause();
+                playButton2.textContent = 'Play';
+            }
+        });
+
+        // Loading screen script
+        window.addEventListener('load', () => {
+            const loadingScreen = document.getElementById('loading-screen');
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+            }, 250); // 1 second fade-out duration
+        });
+    </script>
+</body>
+</html>
